@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                     city: City(
                       id: 2,
                       name: 'Bandung',
-                      imageUrl: 'assets/city1.png',
+                      imageUrl: 'assets/city2.png',
                       isPopular: true,
                     ),
                   ),
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                     city: City(
                       id: 3,
                       name: 'Surabaya',
-                      imageUrl: 'assets/city1.png',
+                      imageUrl: 'assets/city3.png',
                     ),
                   ),
                   const SizedBox(width: 24),
