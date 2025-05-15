@@ -6,10 +6,17 @@ import 'package:find_house_app/widgets/rating_item.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.space});
 
   final Space space;
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  bool isClicked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +42,7 @@ class DetailScreen extends StatelessWidget {
         child: Stack(
           children: [
             Image.network(
-              space.imageUrl,
+              widget.space.imageUrl,
               width: MediaQuery.of(context).size.width,
               height: 350,
               fit: BoxFit.cover,
@@ -64,13 +71,13 @@ class DetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  space.name,
+                                  widget.space.name,
                                   style: blackTextStyle.copyWith(fontSize: 22),
                                 ),
                                 SizedBox(height: 2),
                                 Text.rich(
                                   TextSpan(
-                                    text: '\$${space.price}',
+                                    text: '\$${widget.space.price}',
                                     style: purpleTextStyle.copyWith(
                                       fontSize: 16,
                                     ),
@@ -93,7 +100,7 @@ class DetailScreen extends StatelessWidget {
                                       margin: EdgeInsets.only(left: 2),
                                       child: RatingItem(
                                         index: index,
-                                        rating: space.rating,
+                                        rating: widget.space.rating,
                                       ),
                                     );
                                   }).toList(),
@@ -118,17 +125,17 @@ class DetailScreen extends StatelessWidget {
                             FacilityItem(
                               name: 'kitchen',
                               imageUrl: 'assets/icon_kitchen.png',
-                              total: space.numberOfKitchens,
+                              total: widget.space.numberOfKitchens,
                             ),
                             FacilityItem(
                               name: 'bedroom',
                               imageUrl: 'assets/icon_bedroom.png',
-                              total: space.numberOfBedrooms,
+                              total: widget.space.numberOfBedrooms,
                             ),
                             FacilityItem(
                               name: 'Big Lemari',
                               imageUrl: 'assets/icon_cupboard.png',
-                              total: space.numberOfCupboards,
+                              total: widget.space.numberOfCupboards,
                             ),
                           ],
                         ),
@@ -147,7 +154,7 @@ class DetailScreen extends StatelessWidget {
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children:
-                              space.photos.map((item) {
+                              widget.space.photos.map((item) {
                                 return Container(
                                   margin: EdgeInsets.only(left: 24),
                                   child: ClipRRect(
@@ -178,12 +185,12 @@ class DetailScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '${space.address}\n${space.city}',
+                              '${widget.space.address}\n${widget.space.city}',
                               style: greyTextStyle.copyWith(fontSize: 14),
                             ),
                             InkWell(
                               onTap: () {
-                                launchExternalUrl(space.mapUrl);
+                                launchExternalUrl(widget.space.mapUrl);
                               },
                               child: Image.asset(
                                 'assets/btn_map.png',
@@ -200,7 +207,7 @@ class DetailScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width - (2 * 24),
                         child: ElevatedButton(
                           onPressed: () {
-                            launchExternalUrl('tel:${space.phone}');
+                            launchExternalUrl('tel:${widget.space.phone}');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: purpleColor,
@@ -231,7 +238,17 @@ class DetailScreen extends StatelessWidget {
                     },
                     child: Image.asset('assets/btn_back.png', width: 40),
                   ),
-                  Image.asset('assets/btn_wishlist.png', width: 40),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isClicked = !isClicked;
+                      });
+                    },
+                    child:
+                        isClicked
+                            ? Image.asset('assets/btn_wishlist_active.png', width: 40)
+                            : Image.asset('assets/btn_wishlist.png', width: 40),
+                  ),
                 ],
               ),
             ),
