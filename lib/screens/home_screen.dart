@@ -77,6 +77,31 @@ class HomeScreen extends StatelessWidget {
                       imageUrl: 'assets/city3.png',
                     ),
                   ),
+                  const SizedBox(width: 20),
+                  CityCard(
+                    city: City(
+                      id: 4,
+                      name: 'Palembang',
+                      imageUrl: 'assets/city4.png',
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  CityCard(
+                    city: City(
+                      id: 5,
+                      name: 'Aceh',
+                      imageUrl: 'assets/city5.png',
+                      isPopular: true,
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  CityCard(
+                    city: City(
+                      id: 6,
+                      name: 'Bogor',
+                      imageUrl: 'assets/city6.png',
+                    ),
+                  ),
                   const SizedBox(width: 24),
                 ],
               ),
